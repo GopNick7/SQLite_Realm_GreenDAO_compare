@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="com.chi.nikita.sqlite_realm_greendao_compare.ui.activity.MainActivity">
+
+    <EditText
+
+        android:id="@+id/edtID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/id"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/edtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtID"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/edtAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtName"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/age"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/tvSQLite"
+        android:layout_below="@id/edtAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sqlite" />
+
+    <LinearLayout
+        android:id="@+id/llSQLite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvSQLite"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnInsert300kSQLite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/insert300k" />
+
+        <Button
+            android:id="@+id/btnInsertSQLite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/insert" />
+
+        <Button
+            android:id="@+id/btnLoadAllSQLite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/loadAll" />
+
+        <Button
+            android:id="@+id/btnUpdateSQLite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/update" />
+
+        <Button
+            android:id="@+id/btnDeleteSQLite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/delete" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvRealm"
+        android:layout_below="@id/llSQLite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/realm" />
+
+    <LinearLayout
+        android:id="@+id/llRealm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvRealm"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnInsert300kRealm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/insert300k" />
+
+        <Button
+            android:id="@+id/btnInsertRealm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/insert" />
+
+        <Button
+            android:id="@+id/btnLoadAllRealm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/loadAll" />
+
+        <Button
+            android:id="@+id/btnUpdateRealm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/update" />
+
+        <Button
+            android:id="@+id/btnDeleteRealm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/delete" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/llRealm" />
+
+</RelativeLayout>

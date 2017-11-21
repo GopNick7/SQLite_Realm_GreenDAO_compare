@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SQLite_Realm_greenDAO_compare</string>
+    <string name="id">id</string>
+    <string name="name">name</string>
+    <string name="age">age</string>
+    <string name="insert">insert</string>
+    <string name="loadAll">loadAll</string>
+    <string name="update">update</string>
+    <string name="delete">delete</string>
+    <string name="insert300k">Insert 300k</string>
+    <string name="sqlite">SQLite</string>
+    <string name="realm">Realm</string>
+</resources>

@@ -20,7 +20,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
 
     private SQLiteDatabase sqLiteDatabase;
     private static SQLiteManager ourInstance;
-    private static final String DB_NAME = "TEST_DB";
+    private static final String DB_NAME = "SQLITE_DB";
     private static final int VERSION = 1;
     private static final String TABLE_USER = "USER_TABLE";
     private Handler handler;

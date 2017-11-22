@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.chi.nikita.sqlite_realm_greendao_compare.R;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.adapter.DataRVAdapter;
+import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelRealm;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelSQLite;
 
 public class MainActivity extends AppCompatActivity implements MainView, View.OnClickListener {
@@ -17,7 +18,6 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     private Button btnInsert300kSQLite, btnInsertSQLite, btnLoadAllSQLite, btnUpdateSQLite, btnDeleteSQLite;
     private Button btnInsert300kRealm, btnInsertRealm, btnLoadAllRealm, btnUpdateRealm, btnDeleteRealm;
     private MainPresenter<MainView> presenter;
-    private UserModelSQLite userModelSQLite;
     private DataRVAdapter adapter;
 
     @Override
@@ -62,11 +62,13 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
 
     @Override
     public void onClick(View view) {
-        userModelSQLite = new UserModelSQLite();
+        UserModelSQLite userModelSQLite = new UserModelSQLite();
+        UserModelRealm userModelRealm = new UserModelRealm();
+
         switch (view.getId()) {
             case R.id.btnInsert300kSQLite:
                 presenter.insert300kUsersSQLite();
-                setButtonEnabled(false);
+                btnInsert300kSQLite.setEnabled(false);
                 break;
             case R.id.btnInsertSQLite:
                 userModelSQLite.setName(getValue(edtName));
@@ -85,16 +87,21 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
                 presenter.getAllUsersSQLite();
                 break;
             case R.id.btnInsert300kRealm:
-
+                presenter.insert300kUsersRealm();
+                btnInsert300kRealm.setEnabled(false);
                 break;
             case R.id.btnInsertRealm:
-
+                userModelRealm.setName(getValue(edtName));
+                userModelRealm.setAge(Integer.parseInt(getValue(edtAge)));
+                presenter.insertUserRealm(userModelRealm);
                 break;
             case R.id.btnUpdateRealm:
-
+                userModelRealm.setName(getValue(edtName));
+                userModelRealm.setAge(Integer.parseInt(getValue(edtAge)));
+                presenter.updateUserRealm(Integer.parseInt(getValue(edtId)), userModelRealm);
                 break;
             case R.id.btnDeleteRealm:
-
+                presenter.deleteUserRealm(Integer.parseInt(getValue(edtId)));
                 break;
             case R.id.btnLoadAllRealm:
 
@@ -106,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
         return edtText.getText().toString().trim();
     }
 
-    private void setButtonEnabled(@NonNull final Boolean bool) {
-        btnInsert300kSQLite.setEnabled(bool);
-    }
+//    private void setButtonEnabled(@NonNull final Boolean bool) {
+//        btnInsert300kSQLite.setEnabled(bool);
+//    }
 }

@@ -10,7 +10,7 @@ import com.facebook.stetho.Stetho;
 
 import io.realm.Realm;
 
-public class ApplicationSQLite_Realm_greenDAO_compare extends Application {
+public class ApplicationDB extends Application {
 
     final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -29,8 +29,6 @@ public class ApplicationSQLite_Realm_greenDAO_compare extends Application {
             SQLiteManager.getInstance().openDB();
         }
 
-        //Realm
         Realm.init(this);
     }
-
 }

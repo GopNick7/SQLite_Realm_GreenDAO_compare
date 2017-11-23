@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.chi.nikita.sqlite_realm_greendao_compare.BuildConfig;
+import com.chi.nikita.sqlite_realm_greendao_compare.data.db.GreenDAOManager;
+import com.chi.nikita.sqlite_realm_greendao_compare.data.db.RealmManager;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.db.SQLiteManager;
 import com.facebook.stetho.Stetho;
 
@@ -25,10 +27,17 @@ public class ApplicationDB extends Application {
 
         //SQLite
         if (!SQLiteManager.isInit()) {
-            SQLiteManager.initDatabase(getApplicationContext(), handler);
-            SQLiteManager.getInstance().openDB();
+            SQLiteManager.init(this, handler);
         }
 
-        Realm.init(this);
+        //Realm
+        if (!RealmManager.isInit()) {
+            Realm.init(this);
+        }
+
+        //GreenDAO
+        if (!GreenDAOManager.isInit()) {
+            GreenDAOManager.init(this);
+        }
     }
 }

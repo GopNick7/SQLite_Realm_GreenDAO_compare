@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.chi.nikita.sqlite_realm_greendao_compare.R;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.adapter.DataRVAdapter;
+import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelGreenDAO;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelRealm;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelSQLite;
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     private EditText edtId, edtName, edtAge;
     private Button btnInsert300kSQLite, btnInsertSQLite, btnLoadAllSQLite, btnUpdateSQLite, btnDeleteSQLite;
     private Button btnInsert300kRealm, btnInsertRealm, btnLoadAllRealm, btnUpdateRealm, btnDeleteRealm;
+    private Button btnInsert300kGreenDAO, btnInsertGreenDAO, btnLoadAllGreenDAO, btnUpdateGreenDAO, btnDeleteGreenDAO;
     private MainPresenter<MainView> presenter;
     private DataRVAdapter adapter;
 
@@ -58,12 +60,25 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
         btnLoadAllRealm.setOnClickListener(this);
         btnUpdateRealm.setOnClickListener(this);
         btnDeleteRealm.setOnClickListener(this);
+
+        btnInsert300kGreenDAO = findViewById(R.id.btnInsert300kGreenDAO);
+        btnInsertGreenDAO = findViewById(R.id.btnInsertGreenDAO);
+        btnLoadAllGreenDAO = findViewById(R.id.btnLoadAllGreenDAO);
+        btnUpdateGreenDAO = findViewById(R.id.btnUpdateGreenDAO);
+        btnDeleteGreenDAO = findViewById(R.id.btnDeleteGreenDAO);
+
+        btnInsert300kGreenDAO.setOnClickListener(this);
+        btnInsertGreenDAO.setOnClickListener(this);
+        btnLoadAllGreenDAO.setOnClickListener(this);
+        btnUpdateGreenDAO.setOnClickListener(this);
+        btnDeleteGreenDAO.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         UserModelSQLite userModelSQLite = new UserModelSQLite();
         UserModelRealm userModelRealm = new UserModelRealm();
+        UserModelGreenDAO userModelGreenDAO = new UserModelGreenDAO();
 
         switch (view.getId()) {
             case R.id.btnInsert300kSQLite:
@@ -104,7 +119,27 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
                 presenter.deleteUserRealm(Integer.parseInt(getValue(edtId)));
                 break;
             case R.id.btnLoadAllRealm:
-
+                presenter.getAllUsersRealm();
+                break;
+            case R.id.btnInsert300kGreenDAO:
+                presenter.insert300kUsersGreenDAO();
+                btnInsert300kGreenDAO.setEnabled(false);
+                break;
+            case R.id.btnInsertGreenDAO:
+                userModelGreenDAO.setName(getValue(edtName));
+                userModelGreenDAO.setAge(Integer.parseInt(getValue(edtAge)));
+                presenter.insertUserGreenDAO(userModelGreenDAO);
+                break;
+            case R.id.btnUpdateGreenDAO:
+                userModelGreenDAO.setName(getValue(edtName));
+                userModelGreenDAO.setAge(Integer.parseInt(getValue(edtAge)));
+                presenter.updateUserGreenDAO(Integer.parseInt(getValue(edtId)), userModelGreenDAO);
+                break;
+            case R.id.btnDeleteGreenDAO:
+                presenter.deleteUserGreenDAO(Integer.parseInt(getValue(edtId)));
+                break;
+            case R.id.btnLoadAllGreenDAO:
+                presenter.getAllUsersGreenDAO();
                 break;
         }
     }

@@ -39,6 +39,10 @@ public class RealmManager {
         return instance;
     }
 
+    public static boolean isInit() {
+        return instance != null;
+    }
+
     public void insertUsersToDB(final @NonNull List<UserModelRealm> userModelRealmList) {
         final long l = System.currentTimeMillis();
         realm.executeTransactionAsync(new Realm.Transaction() {
@@ -49,12 +53,12 @@ public class RealmManager {
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                Log.d("TAG", "SUCCESS insertUsersToDBRealm: " + userModelRealmList.size() + " rows in " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "SUCCESS insertUsersToRealm: " + userModelRealmList.size() + " rows in " + (System.currentTimeMillis() - l) + "ms");
             }
         }, new Realm.Transaction.OnError() {
             @Override
             public void onError(Throwable error) {
-                Log.d("TAG", "FAILED insertUsersToDBRealm: " + userModelRealmList.size() + " rows in " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "FAILED insertUsersToRealm: " + userModelRealmList.size() + " rows in " + (System.currentTimeMillis() - l) + "ms");
             }
         });
 //        executor.execute(new Runnable() {
@@ -79,15 +83,16 @@ public class RealmManager {
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                Log.d("TAG", "SUCCESS insertUserToDBRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "SUCCESS insertUserToRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
             }
         }, new Realm.Transaction.OnError() {
             @Override
             public void onError(Throwable error) {
-                Log.d("TAG", "FAILED insertUserToDBRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "FAILED insertUserToRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
             }
         });
     }
+
     public void updateUserInDB(final int id, @NonNull final UserModelRealm userModelRealm) {
         final long l = System.currentTimeMillis();
         realm.executeTransactionAsync(new Realm.Transaction() {
@@ -101,12 +106,12 @@ public class RealmManager {
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                Log.d("TAG", "SUCCESS updateUserInDBRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "SUCCESS updateUserInRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
             }
         }, new Realm.Transaction.OnError() {
             @Override
             public void onError(Throwable error) {
-                Log.d("TAG", "FAILED updateUserInDBRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "FAILED updateUserInRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
             }
         });
     }
@@ -122,12 +127,12 @@ public class RealmManager {
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                Log.d("TAG", "SUCCESS deleteUserInDBRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "SUCCESS deleteUserInRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
             }
         }, new Realm.Transaction.OnError() {
             @Override
             public void onError(Throwable error) {
-                Log.d("TAG", "FAILED deleteUserInDBRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "FAILED deleteUserInRealm: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
             }
         });
     }

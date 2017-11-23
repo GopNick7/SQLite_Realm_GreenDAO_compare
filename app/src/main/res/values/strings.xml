@@ -10,4 +10,5 @@
     <string name="insert300k">Insert 300k</string>
     <string name="sqlite">SQLite</string>
     <string name="realm">Realm</string>
+    <string name="greenDao">GreenDAO</string>
 </resources>

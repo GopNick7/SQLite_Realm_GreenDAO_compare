@@ -137,10 +137,60 @@
             android:hint="@string/delete" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvGreenDAO"
+        android:layout_below="@id/llRealm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/greenDao" />
+
+    <LinearLayout
+        android:id="@+id/llGreenDAO"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvGreenDAO"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnInsert300kGreenDAO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/insert300k" />
+
+        <Button
+            android:id="@+id/btnInsertGreenDAO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/insert" />
+
+        <Button
+            android:id="@+id/btnLoadAllGreenDAO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/loadAll" />
+
+        <Button
+            android:id="@+id/btnUpdateGreenDAO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/update" />
+
+        <Button
+            android:id="@+id/btnDeleteGreenDAO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/delete" />
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/llRealm" />
+        android:layout_below="@+id/llGreenDAO" />
 
 </RelativeLayout>

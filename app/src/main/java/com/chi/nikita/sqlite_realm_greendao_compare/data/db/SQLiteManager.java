@@ -67,8 +67,9 @@ public class SQLiteManager extends SQLiteOpenHelper {
         return ourInstance;
     }
 
-    public static void initDatabase(@NonNull final Context context, @NonNull final Handler handler) {
+    public static void init(@NonNull final Context context, @NonNull final Handler handler) {
         ourInstance = new SQLiteManager(context, handler);
+        SQLiteManager.getInstance().openDB();
     }
 
     public static boolean isInit() {
@@ -116,7 +117,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 } finally {
                     sqLiteDatabase.endTransaction();
                 }
-                Log.d("TAG", "insertUsersToDB: " + userModelSQLiteList.size() + " rows in " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "SUCCESS insertUsersToSQLite: " + userModelSQLiteList.size() + " rows in " + (System.currentTimeMillis() - l) + "ms");
             }
         });
     }
@@ -142,7 +143,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 } finally {
                     sqLiteDatabase.endTransaction();
                 }
-                Log.d("TAG", "insertUsersToDB: " + 1 + " row " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "SUCCESS insertUsersToSQLite: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
             }
         });
     }
@@ -170,7 +171,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 } finally {
                     sqLiteDatabase.endTransaction();
                 }
-                Log.d("TAG", "updateUserInDB: " + 1 + " row " + (System.currentTimeMillis() - l) + "ms");
+                Log.d("TAG", "SUCCESS updateUserInSQLite: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
             }
         });
     }
@@ -184,7 +185,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         final String where = ID + " = " + id;
         long l = System.currentTimeMillis();
         sqLiteDatabase.delete(TABLE_USER, where, null);
-        Log.d("TAG", "deleteUserInDB: " + 1 + " row " + (System.currentTimeMillis() - l) + "ms");
+        Log.d("TAG", "SUCCESS deleteUserInSQLite: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
     }
 
     /**

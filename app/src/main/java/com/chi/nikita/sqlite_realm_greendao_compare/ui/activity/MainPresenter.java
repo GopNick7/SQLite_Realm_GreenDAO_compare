@@ -3,6 +3,7 @@ package com.chi.nikita.sqlite_realm_greendao_compare.ui.activity;
 
 import android.support.annotation.NonNull;
 
+import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelGreenDAO;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelRealm;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelSQLite;
 import com.chi.nikita.sqlite_realm_greendao_compare.ui.Presenter;
@@ -29,4 +30,14 @@ public interface MainPresenter<T extends View> extends Presenter<T> {
     void deleteUserRealm(int id);
 
     void getAllUsersRealm();
+
+    void insert300kUsersGreenDAO();
+
+    void insertUserGreenDAO(@NonNull UserModelGreenDAO userModelGreenDAO);
+
+    void updateUserGreenDAO(long id, @NonNull UserModelGreenDAO userModelGreenDAO);
+
+    void deleteUserGreenDAO(long id);
+
+    void getAllUsersGreenDAO();
 }

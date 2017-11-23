@@ -93,7 +93,7 @@ public class RealmManager {
         });
     }
 
-    public void updateUserInDB(final int id, @NonNull final UserModelRealm userModelRealm) {
+    public void updateUserInDB(final long id, @NonNull final UserModelRealm userModelRealm) {
         final long l = System.currentTimeMillis();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -116,7 +116,7 @@ public class RealmManager {
         });
     }
 
-    public void deleteUserInDB(final int id) {
+    public void deleteUserInDB(final long id) {
         final long l = System.currentTimeMillis();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override

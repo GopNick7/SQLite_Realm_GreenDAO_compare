@@ -6,15 +6,15 @@ import io.realm.annotations.PrimaryKey;
 public class UserModelRealm extends RealmObject {
 
     @PrimaryKey
-    private int id;
+    private long id;
     private String name;
     private int age;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

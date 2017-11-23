@@ -3,6 +3,7 @@ package com.chi.nikita.sqlite_realm_greendao_compare.data.model;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Index;
 
 @Entity
 public class UserModelGreenDAO {

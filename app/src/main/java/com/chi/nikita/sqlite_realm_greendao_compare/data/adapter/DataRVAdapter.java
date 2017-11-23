@@ -67,7 +67,7 @@ public class DataRVAdapter extends RecyclerView.Adapter<DataRVAdapter.UserViewHo
 
         public void bind(UserModelSQLite userModelSQLite) {
 
-            tvId.setText(userModelSQLite.getId());
+            tvId.setText((int) userModelSQLite.getId());
             tvName.setText(userModelSQLite.getName());
             tvAge.setText(userModelSQLite.getAge());
         }

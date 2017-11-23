@@ -2,15 +2,15 @@ package com.chi.nikita.sqlite_realm_greendao_compare.data.model;
 
 public class UserModelSQLite {
 
-    private int id;
+    private long id;
     private String name;
     private int age;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

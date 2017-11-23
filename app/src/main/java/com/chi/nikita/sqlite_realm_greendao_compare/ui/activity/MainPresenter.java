@@ -15,9 +15,9 @@ public interface MainPresenter<T extends View> extends Presenter<T> {
 
     void insertUserSQLite(@NonNull UserModelSQLite userModelSQLite);
 
-    void updateUserSQLite(int id, @NonNull UserModelSQLite userModelSQLite);
+    void updateUserSQLite(long id, @NonNull UserModelSQLite userModelSQLite);
 
-    void deleteUserSQLite(int id);
+    void deleteUserSQLite(long id);
 
     void getAllUsersSQLite();
 
@@ -25,9 +25,9 @@ public interface MainPresenter<T extends View> extends Presenter<T> {
 
     void insertUserRealm(@NonNull UserModelRealm userModelRealm);
 
-    void updateUserRealm(int id, @NonNull UserModelRealm userModelRealm);
+    void updateUserRealm(long id, @NonNull UserModelRealm userModelRealm);
 
-    void deleteUserRealm(int id);
+    void deleteUserRealm(long id);
 
     void getAllUsersRealm();
 

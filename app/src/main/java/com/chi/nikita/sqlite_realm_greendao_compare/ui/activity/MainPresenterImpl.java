@@ -15,7 +15,7 @@ import java.util.List;
 public class MainPresenterImpl implements MainPresenter<MainView> {
 
     private MainView view;
-    private int userCount = 300_000;
+    private int userCount = 1000;
 
     @Override
     public void bindView(MainView view) {
@@ -50,12 +50,12 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
     }
 
     @Override
-    public void updateUserSQLite(int id, @NonNull UserModelSQLite userModelSQLite) {
+    public void updateUserSQLite(long id, @NonNull UserModelSQLite userModelSQLite) {
         SQLiteManager.getInstance().updateUserInDB(id, userModelSQLite);
     }
 
     @Override
-    public void deleteUserSQLite(int id) {
+    public void deleteUserSQLite(long id) {
         SQLiteManager.getInstance().deleteUserInDB(id);
     }
 
@@ -83,12 +83,12 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
     }
 
     @Override
-    public void updateUserRealm(int id, @NonNull UserModelRealm userModelRealm) {
+    public void updateUserRealm(long id, @NonNull UserModelRealm userModelRealm) {
         RealmManager.getInstance().updateUserInDB(id, userModelRealm);
     }
 
     @Override
-    public void deleteUserRealm(int id) {
+    public void deleteUserRealm(long id) {
         RealmManager.getInstance().deleteUserInDB(id);
     }
 

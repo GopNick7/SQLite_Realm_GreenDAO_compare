@@ -93,10 +93,10 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
             case R.id.btnUpdateSQLite:
                 userModelSQLite.setName(getValue(edtName));
                 userModelSQLite.setAge(Integer.parseInt(getValue(edtAge)));
-                presenter.updateUserSQLite(Integer.parseInt(getValue(edtId)), userModelSQLite);
+                presenter.updateUserSQLite(Long.parseLong(getValue(edtId)), userModelSQLite);
                 break;
             case R.id.btnDeleteSQLite:
-                presenter.deleteUserSQLite(Integer.parseInt(getValue(edtId)));
+                presenter.deleteUserSQLite(Long.parseLong(getValue(edtId)));
                 break;
             case R.id.btnLoadAllSQLite:
                 presenter.getAllUsersSQLite();
@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
                 btnInsert300kRealm.setEnabled(false);
                 break;
             case R.id.btnInsertRealm:
+                userModelRealm.setId(Long.parseLong(getValue(edtId)));
                 userModelRealm.setName(getValue(edtName));
                 userModelRealm.setAge(Integer.parseInt(getValue(edtAge)));
                 presenter.insertUserRealm(userModelRealm);
@@ -113,10 +114,10 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
             case R.id.btnUpdateRealm:
                 userModelRealm.setName(getValue(edtName));
                 userModelRealm.setAge(Integer.parseInt(getValue(edtAge)));
-                presenter.updateUserRealm(Integer.parseInt(getValue(edtId)), userModelRealm);
+                presenter.updateUserRealm(Long.parseLong(getValue(edtId)), userModelRealm);
                 break;
             case R.id.btnDeleteRealm:
-                presenter.deleteUserRealm(Integer.parseInt(getValue(edtId)));
+                presenter.deleteUserRealm(Long.parseLong(getValue(edtId)));
                 break;
             case R.id.btnLoadAllRealm:
                 presenter.getAllUsersRealm();
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
                 btnInsert300kGreenDAO.setEnabled(false);
                 break;
             case R.id.btnInsertGreenDAO:
+                userModelGreenDAO.setId(Long.parseLong(getValue(edtId)));
                 userModelGreenDAO.setName(getValue(edtName));
                 userModelGreenDAO.setAge(Integer.parseInt(getValue(edtAge)));
                 presenter.insertUserGreenDAO(userModelGreenDAO);
@@ -133,10 +135,10 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
             case R.id.btnUpdateGreenDAO:
                 userModelGreenDAO.setName(getValue(edtName));
                 userModelGreenDAO.setAge(Integer.parseInt(getValue(edtAge)));
-                presenter.updateUserGreenDAO(Integer.parseInt(getValue(edtId)), userModelGreenDAO);
+                presenter.updateUserGreenDAO(Long.parseLong(getValue(edtId)), userModelGreenDAO);
                 break;
             case R.id.btnDeleteGreenDAO:
-                presenter.deleteUserGreenDAO(Integer.parseInt(getValue(edtId)));
+                presenter.deleteUserGreenDAO(Long.parseLong(getValue(edtId)));
                 break;
             case R.id.btnLoadAllGreenDAO:
                 presenter.getAllUsersGreenDAO();

@@ -154,7 +154,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
      * @param id        on this id we update our users
      * @param userModelSQLite {@link UserModelSQLite}
      */
-    public void updateUserInDB(final int id, @NonNull final UserModelSQLite userModelSQLite) {
+    public void updateUserInDB(final long id, @NonNull final UserModelSQLite userModelSQLite) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -181,7 +181,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
      *
      * @param id on this id we delete our users
      */
-    public void deleteUserInDB(final int id) {
+    public void deleteUserInDB(final long id) {
         final String where = ID + " = " + id;
         long l = System.currentTimeMillis();
         sqLiteDatabase.delete(TABLE_USER, where, null);

@@ -3,10 +3,9 @@ package com.chi.nikita.sqlite_realm_greendao_compare.data.model;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Index;
 
 @Entity
-public class UserModelGreenDAO {
+public class UserModelGreenDAO implements iCRUD {
 
     @Id(autoincrement = true)
     private long id;
@@ -25,31 +24,32 @@ public class UserModelGreenDAO {
     public UserModelGreenDAO() {
     }
 
-
+    @Override
     public long getId() {
         return id;
     }
 
+    @Override
     public void setId(long id) {
         this.id = id;
     }
 
-
+    @Override
     public String getName() {
         return name;
     }
 
-
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-
+    @Override
     public int getAge() {
         return age;
     }
 
-
+    @Override
     public void setAge(int age) {
         this.age = age;
     }

@@ -1,16 +1,19 @@
 package com.chi.nikita.sqlite_realm_greendao_compare.data.db;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModel;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelRealm;
 
 import java.util.List;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class RealmManager {
 
@@ -18,12 +21,14 @@ public class RealmManager {
     private RealmConfiguration config;
     private Realm realm;
     private Executor executor;
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     private RealmManager() {
 //        executor = Executors.newSingleThreadExecutor();
 //        executor.execute(new Runnable() {
 //            @Override
 //            public void run() {
+
         config = new RealmConfiguration.Builder().name("REALM_DB").build();
         realm = Realm.getDefaultInstance();
         Realm.setDefaultConfiguration(config);
@@ -137,6 +142,24 @@ public class RealmManager {
         });
     }
 
+    public void getAllUsersFromDB(final @NonNull ResultListener resultListener) {
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                long l = System.currentTimeMillis();
+                final RealmResults userModelRealmList = realm.where(UserModelRealm.class).findAll();
+                Log.d("TAG", "SUCCESS showAllUserInRealm: " + userModelRealmList.size() + " rows in " + (System.currentTimeMillis() - l) + "ms");
+                final List<UserModel> userModelRealms = UserModel.createFrom(userModelRealmList);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        resultListener.onSuccess(userModelRealms);
+                    }
+                });
+            }
+        });
+    }
+
 //
 //    @Override
 //    public void getAllStudents(OnGetAllStudentsCallback callback) {
@@ -162,4 +185,8 @@ public class RealmManager {
 //        if (callback != null)
 //            callback.onSuccess(student);
 //    }
+
+    public interface ResultListener {
+        void onSuccess(final @NonNull List<UserModel> userModelRealmList);
+    }
 }

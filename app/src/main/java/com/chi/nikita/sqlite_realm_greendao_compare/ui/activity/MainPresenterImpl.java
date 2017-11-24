@@ -1,10 +1,12 @@
 package com.chi.nikita.sqlite_realm_greendao_compare.ui.activity;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.chi.nikita.sqlite_realm_greendao_compare.data.db.GreenDAOManager;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.db.RealmManager;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.db.SQLiteManager;
+import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModel;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelGreenDAO;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelRealm;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelSQLite;
@@ -15,10 +17,12 @@ import java.util.List;
 public class MainPresenterImpl implements MainPresenter<MainView> {
 
     private MainView view;
-    private int userCount = 1000;
+    private int userCount = 300_000;
+    private SQLiteManager.ResultListener resultListenerFromSQLite;
+    private RealmManager.ResultListener resultListenerFromRealm;
 
     @Override
-    public void bindView(MainView view) {
+    public void bindView(@NonNull final MainView view) {
         this.view = view;
     }
 
@@ -37,7 +41,7 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
         final List<UserModelSQLite> userModelSQLiteList = new ArrayList<>();
         for (int i = 0; i < userCount; i++) {
             final UserModelSQLite userModelSQLite = new UserModelSQLite();
-            userModelSQLite.setName("Name:" + i);
+            userModelSQLite.setName("SQLite:" + i);
             userModelSQLite.setAge(i);
             userModelSQLiteList.add(userModelSQLite);
         }
@@ -45,23 +49,29 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
     }
 
     @Override
-    public void insertUserSQLite(@NonNull UserModelSQLite userModelSQLite) {
+    public void insertUserSQLite(@NonNull final UserModelSQLite userModelSQLite) {
         SQLiteManager.getInstance().insertUsersToDB(userModelSQLite);
     }
 
     @Override
-    public void updateUserSQLite(long id, @NonNull UserModelSQLite userModelSQLite) {
+    public void updateUserSQLite(final long id, @NonNull final UserModelSQLite userModelSQLite) {
         SQLiteManager.getInstance().updateUserInDB(id, userModelSQLite);
     }
 
     @Override
-    public void deleteUserSQLite(long id) {
+    public void deleteUserSQLite(final long id) {
         SQLiteManager.getInstance().deleteUserInDB(id);
     }
 
     @Override
     public void getAllUsersSQLite() {
-
+        resultListenerFromSQLite = new SQLiteManager.ResultListener() {
+            @Override
+            public void onSuccess(@NonNull final List<UserModelSQLite> userModelSQLiteList) {
+                view.onShowUsers(userModelSQLiteList);
+            }
+        };
+        SQLiteManager.getInstance().getAllUsersFromDB(resultListenerFromSQLite);
     }
 
     @Override
@@ -70,7 +80,7 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
         for (int i = 0; i < userCount; i++) {
             final UserModelRealm userModelRealm = new UserModelRealm();
             userModelRealm.setId(i);
-            userModelRealm.setName("Name:" + i);
+            userModelRealm.setName("Realm:" + i);
             userModelRealm.setAge(i);
             userModelRealmList.add(userModelRealm);
         }
@@ -78,23 +88,30 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
     }
 
     @Override
-    public void insertUserRealm(@NonNull UserModelRealm userModelRealm) {
+    public void insertUserRealm(final @NonNull UserModelRealm userModelRealm) {
         RealmManager.getInstance().insertUsersToDB(userModelRealm);
     }
 
     @Override
-    public void updateUserRealm(long id, @NonNull UserModelRealm userModelRealm) {
+    public void updateUserRealm(final long id, @NonNull final UserModelRealm userModelRealm) {
         RealmManager.getInstance().updateUserInDB(id, userModelRealm);
     }
 
     @Override
-    public void deleteUserRealm(long id) {
+    public void deleteUserRealm(final long id) {
         RealmManager.getInstance().deleteUserInDB(id);
     }
 
     @Override
     public void getAllUsersRealm() {
-
+        resultListenerFromRealm = new RealmManager.ResultListener() {
+            @Override
+            public void onSuccess(@NonNull final List<UserModel> userModelRealmList) {
+                Log.d("REALM", "onSuccess: " + userModelRealmList.size());
+//                view.onShowUsers(userModelRealmList);
+            }
+        };
+        RealmManager.getInstance().getAllUsersFromDB(resultListenerFromRealm);
     }
 
     @Override
@@ -103,7 +120,7 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
         for (int i = 0; i < userCount; i++) {
             final UserModelGreenDAO userModelGreenDAO = new UserModelGreenDAO();
             userModelGreenDAO.setId(i);
-            userModelGreenDAO.setName("Name:" + i);
+            userModelGreenDAO.setName("GreenDAO:" + i);
             userModelGreenDAO.setAge(i);
             userModelGreenDAOList.add(userModelGreenDAO);
         }

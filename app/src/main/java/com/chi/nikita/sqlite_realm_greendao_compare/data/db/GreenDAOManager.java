@@ -1,6 +1,7 @@
 package com.chi.nikita.sqlite_realm_greendao_compare.data.db;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -20,9 +21,11 @@ public class GreenDAOManager {
     private static GreenDAOManager instance;
     private DaoSession daoSession;
     private Executor executor;
+    private Handler handler;
 
-    private GreenDAOManager(final @NonNull Context context) {
+    private GreenDAOManager(final @NonNull Context context, @NonNull final Handler handler) {
         executor = Executors.newSingleThreadExecutor();
+        this.handler = handler;
         final DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context, "GREENDAO_DB");
         final Database db = helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
@@ -35,8 +38,8 @@ public class GreenDAOManager {
         return instance;
     }
 
-    public static void init(final @NonNull Context context) {
-        instance = new GreenDAOManager(context);
+    public static void init(final @NonNull Context context, @NonNull final Handler handler) {
+        instance = new GreenDAOManager(context, handler);
     }
 
     public static boolean isInit() {

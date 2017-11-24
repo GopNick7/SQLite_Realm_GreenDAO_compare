@@ -37,7 +37,7 @@ public class ApplicationDB extends Application {
 
         //GreenDAO
         if (!GreenDAOManager.isInit()) {
-            GreenDAOManager.init(this);
+            GreenDAOManager.init(this, handler);
         }
     }
 }

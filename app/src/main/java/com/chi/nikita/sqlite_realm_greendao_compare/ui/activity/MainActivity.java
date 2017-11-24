@@ -3,6 +3,8 @@ package com.chi.nikita.sqlite_realm_greendao_compare.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +14,9 @@ import com.chi.nikita.sqlite_realm_greendao_compare.data.adapter.DataRVAdapter;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelGreenDAO;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelRealm;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelSQLite;
+import com.chi.nikita.sqlite_realm_greendao_compare.data.model.iCRUD;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainView, View.OnClickListener {
 
@@ -19,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     private Button btnInsert300kSQLite, btnInsertSQLite, btnLoadAllSQLite, btnUpdateSQLite, btnDeleteSQLite;
     private Button btnInsert300kRealm, btnInsertRealm, btnLoadAllRealm, btnUpdateRealm, btnDeleteRealm;
     private Button btnInsert300kGreenDAO, btnInsertGreenDAO, btnLoadAllGreenDAO, btnUpdateGreenDAO, btnDeleteGreenDAO;
+    private RecyclerView recyclerView;
     private MainPresenter<MainView> presenter;
     private DataRVAdapter adapter;
 
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     }
 
     private void init() {
+
+        recyclerView = findViewById(R.id.recyclerView);
+
         edtId = findViewById(R.id.edtID);
         edtName = findViewById(R.id.edtName);
         edtAge = findViewById(R.id.edtAge);
@@ -149,6 +158,14 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     private String getValue(@NonNull final EditText edtText) {
         return edtText.getText().toString().trim();
     }
+
+    @Override
+    public void onShowUsers(List<? extends iCRUD> userModelList) {
+        adapter.swapTipsModelList(userModelList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+    }
+
 
 //    private void setButtonEnabled(@NonNull final Boolean bool) {
 //        btnInsert300kSQLite.setEnabled(bool);

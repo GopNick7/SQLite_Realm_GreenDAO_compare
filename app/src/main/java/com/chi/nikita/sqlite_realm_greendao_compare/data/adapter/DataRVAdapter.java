@@ -9,29 +9,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chi.nikita.sqlite_realm_greendao_compare.R;
-import com.chi.nikita.sqlite_realm_greendao_compare.data.model.UserModelSQLite;
+import com.chi.nikita.sqlite_realm_greendao_compare.data.model.iCRUD;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataRVAdapter extends RecyclerView.Adapter<DataRVAdapter.UserViewHolder> {
 
-    private List<UserModelSQLite> userModelSQLites;
+    private List<iCRUD> userModelList;
 
     public DataRVAdapter() {
-        this.userModelSQLites = new ArrayList<>();
+        this.userModelList = new ArrayList<>();
     }
 
-    /**
-     * Method type of List<UserModelSQLite>
-     *
-     * @return collection userModelSQLites
-     */
-    public void swapTipsModelList(List<UserModelSQLite> userModelSQLiteList) {
-        this.userModelSQLites.clear();
-        this.userModelSQLites.addAll(userModelSQLiteList);
-        notifyDataSetChanged();
 
+    public void swapTipsModelList(@NonNull final List<? extends iCRUD> userModelList) {
+        this.userModelList.clear();
+        this.userModelList.addAll(userModelList);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -43,21 +38,21 @@ public class DataRVAdapter extends RecyclerView.Adapter<DataRVAdapter.UserViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final UserViewHolder holder, final int position) {
-        UserModelSQLite userModelSQLite = userModelSQLites.get(position);
-        holder.bind(userModelSQLite);
+        final iCRUD userModel = userModelList.get(position);
+        holder.bind(userModel);
     }
 
     @Override
     public int getItemCount() {
-        return userModelSQLites.size();
+        return userModelList.size();
     }
 
-    public static class UserViewHolder extends RecyclerView.ViewHolder {
+    static class UserViewHolder extends RecyclerView.ViewHolder {
 
         private CardView cardView;
         private TextView tvId, tvName, tvAge;
 
-        public UserViewHolder(@NonNull final View itemView) {
+        UserViewHolder(@NonNull final View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardView);
             tvId = itemView.findViewById(R.id.tvId);
@@ -65,11 +60,11 @@ public class DataRVAdapter extends RecyclerView.Adapter<DataRVAdapter.UserViewHo
             tvAge = itemView.findViewById(R.id.tvAge);
         }
 
-        public void bind(UserModelSQLite userModelSQLite) {
+        void bind(@NonNull final iCRUD userModel) {
 
-            tvId.setText((int) userModelSQLite.getId());
-            tvName.setText(userModelSQLite.getName());
-            tvAge.setText(userModelSQLite.getAge());
+            tvId.setText(String.valueOf(userModel.getId()));
+            tvName.setText(userModel.getName());
+            tvAge.setText(String.valueOf(userModel.getAge()));
         }
     }
 }

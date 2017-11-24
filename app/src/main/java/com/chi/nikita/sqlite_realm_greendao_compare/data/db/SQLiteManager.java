@@ -104,7 +104,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                long l = System.currentTimeMillis();
+                final long l = System.currentTimeMillis();
                 sqLiteDatabase.beginTransaction();
                 try {
                     final ContentValues cv = new ContentValues();
@@ -131,7 +131,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                long l = System.currentTimeMillis();
+                final long l = System.currentTimeMillis();
                 sqLiteDatabase.beginTransaction();
                 try {
                     final ContentValues cv = new ContentValues();
@@ -151,14 +151,14 @@ public class SQLiteManager extends SQLiteOpenHelper {
     /**
      * Method for update users in database
      *
-     * @param id        on this id we update our users
+     * @param id              on this id we update our users
      * @param userModelSQLite {@link UserModelSQLite}
      */
     public void updateUserInDB(final long id, @NonNull final UserModelSQLite userModelSQLite) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                long l = System.currentTimeMillis();
+                final long l = System.currentTimeMillis();
                 sqLiteDatabase.beginTransaction();
                 final ContentValues cv = new ContentValues();
                 try {
@@ -183,7 +183,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
      */
     public void deleteUserInDB(final long id) {
         final String where = ID + " = " + id;
-        long l = System.currentTimeMillis();
+        final long l = System.currentTimeMillis();
         sqLiteDatabase.delete(TABLE_USER, where, null);
         Log.d("TAG", "SUCCESS deleteUserInSQLite: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
     }
@@ -193,14 +193,15 @@ public class SQLiteManager extends SQLiteOpenHelper {
      *
      * @param resultListener {@link ResultListener}
      */
-    public void getAllUsersFromDB(final ResultListener resultListener) {
+    public void getAllUsersFromDB(final @NonNull ResultListener resultListener) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
+                long l = System.currentTimeMillis();
                 final String select = "SELECT * FROM " + TABLE_USER;
                 final Cursor cursor = sqLiteDatabase.rawQuery(select, null);
                 final List<UserModelSQLite> userModelSQLiteList = getUserModelList(cursor);
-
+                Log.d("TAG", "SUCCESS showAllUserInSQLite: " + userModelSQLiteList.size() + " rows in " + (System.currentTimeMillis() - l) + "ms");
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -227,6 +228,6 @@ public class SQLiteManager extends SQLiteOpenHelper {
     }
 
     public interface ResultListener {
-        void onSuccess(List<UserModelSQLite> userModelSQLiteList);
+        void onSuccess(final @NonNull List<UserModelSQLite> userModelSQLiteList);
     }
 }

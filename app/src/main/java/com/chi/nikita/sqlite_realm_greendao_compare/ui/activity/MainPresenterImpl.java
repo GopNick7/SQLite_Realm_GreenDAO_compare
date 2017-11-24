@@ -107,8 +107,7 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
         resultListenerFromRealm = new RealmManager.ResultListener() {
             @Override
             public void onSuccess(@NonNull final List<UserModel> userModelRealmList) {
-                Log.d("REALM", "onSuccess: " + userModelRealmList.size());
-//                view.onShowUsers(userModelRealmList);
+                view.onShowUsers(userModelRealmList);
             }
         };
         RealmManager.getInstance().getAllUsersFromDB(resultListenerFromRealm);

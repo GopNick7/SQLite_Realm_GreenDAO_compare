@@ -3,11 +3,7 @@ package com.chi.nikita.sqlite_realm_greendao_compare.data.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by user on 24.11.2017.
- */
-
-public class UserModel {
+public class UserModel implements iCRUD{
 
     private long id;
     private String name;

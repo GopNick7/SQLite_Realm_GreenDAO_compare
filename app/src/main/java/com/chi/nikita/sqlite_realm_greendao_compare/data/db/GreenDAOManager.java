@@ -97,7 +97,7 @@ public class GreenDAOManager {
     /**
      * Method for update users in database
      *
-     * @param id on this id we update our users
+     * @param id                on this id we update our users
      * @param userModelGreenDAO {@link UserModelGreenDAO}
      */
     public void updateUserInDB(final long id, @NonNull final UserModelGreenDAO userModelGreenDAO) {
@@ -142,5 +142,36 @@ public class GreenDAOManager {
                 Log.d("TAG", "SUCCESS deleteUserInGreenDAO: " + 1 + " row in " + (System.currentTimeMillis() - l) + "ms");
             }
         });
+    }
+
+    /**
+     * Method show all users from database
+     */
+    public void getAllUsersFromDB(@NonNull final ResultListener resultListener) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                final List<UserModelGreenDAO> userModelGreenDAOList;
+                long l = System.currentTimeMillis();
+                getDaoSession().getDatabase().beginTransaction();
+                try {
+                    userModelGreenDAOList = getDaoSession().getUserModelGreenDAODao().loadAll();
+                    getDaoSession().getDatabase().setTransactionSuccessful();
+                } finally {
+                    getDaoSession().getDatabase().endTransaction();
+                }
+                Log.d("TAG", "SUCCESS showAllUserInGreenDAO: " + userModelGreenDAOList.size() + " rows in " + (System.currentTimeMillis() - l) + "ms");
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        resultListener.onSuccess(userModelGreenDAOList);
+                    }
+                });
+            }
+        });
+    }
+
+    public interface ResultListener {
+        void onSuccess(final @NonNull List<UserModelGreenDAO> userModelGreenDAOList);
     }
 }

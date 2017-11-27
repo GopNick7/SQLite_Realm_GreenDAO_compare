@@ -20,6 +20,7 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
     private int userCount = 300_000;
     private SQLiteManager.ResultListener resultListenerFromSQLite;
     private RealmManager.ResultListener resultListenerFromRealm;
+    private GreenDAOManager.ResultListener resultListenerFromGreenDAO;
 
     @Override
     public void bindView(@NonNull final MainView view) {
@@ -88,7 +89,7 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
     }
 
     @Override
-    public void insertUserRealm(final @NonNull UserModelRealm userModelRealm) {
+    public void insertUserRealm(@NonNull final UserModelRealm userModelRealm) {
         RealmManager.getInstance().insertUsersToDB(userModelRealm);
     }
 
@@ -127,22 +128,28 @@ public class MainPresenterImpl implements MainPresenter<MainView> {
     }
 
     @Override
-    public void insertUserGreenDAO(@NonNull UserModelGreenDAO userModelGreenDAO) {
+    public void insertUserGreenDAO(@NonNull final UserModelGreenDAO userModelGreenDAO) {
         GreenDAOManager.getInstance().insertUsersToDB(userModelGreenDAO);
     }
 
     @Override
-    public void updateUserGreenDAO(long id, @NonNull UserModelGreenDAO userModelGreenDAO) {
+    public void updateUserGreenDAO(final long id, @NonNull UserModelGreenDAO userModelGreenDAO) {
         GreenDAOManager.getInstance().updateUserInDB(id, userModelGreenDAO);
     }
 
     @Override
-    public void deleteUserGreenDAO(long id) {
+    public void deleteUserGreenDAO(final long id) {
         GreenDAOManager.getInstance().deleteUserInDB(id);
     }
 
     @Override
     public void getAllUsersGreenDAO() {
-
+        resultListenerFromGreenDAO = new GreenDAOManager.ResultListener() {
+            @Override
+            public void onSuccess(@NonNull final List<UserModelGreenDAO> userModelGreenDAOList) {
+                view.onShowUsers(userModelGreenDAOList);
+            }
+        };
+        GreenDAOManager.getInstance().getAllUsersFromDB(resultListenerFromGreenDAO);
     }
 }

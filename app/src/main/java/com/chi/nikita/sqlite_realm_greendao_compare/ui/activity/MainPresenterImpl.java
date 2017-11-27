@@ -1,7 +1,6 @@
 package com.chi.nikita.sqlite_realm_greendao_compare.ui.activity;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.chi.nikita.sqlite_realm_greendao_compare.data.db.GreenDAOManager;
 import com.chi.nikita.sqlite_realm_greendao_compare.data.db.RealmManager;
